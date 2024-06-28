@@ -1,0 +1,35 @@
+/* supports CHTML and SVG rendering */
+.MJX-TEX:hover, svg:hover {
+    cursor: pointer;
+    background-color: #DDD;
+    border-radius: 5px;
+}
+
+/* Problems table */
+.CORRECT {
+    background: linear-gradient(to right, transparent, #CFC)
+}
+.INCORRECT {
+    background: linear-gradient(to right, transparent, #FCC)
+}
+.INPROGRESS {
+    background: linear-gradient(to right, transparent, #FFFFC4)
+}
+
+/* Homework Sets table */
+.table-sm thead tr,
+.table-sm tbody tr {
+    height: 30px;
+    vertical-align: middle;
+}
+.table-sm tbody tr:nth-child(odd) {
+    background-color: #F8F9FA;
+}
+.GREEN {
+    font-weight: bold;
+    color: #2B3;
+}
+.BLUE {
+    font-weight: bold;
+    color: #038;
+}
