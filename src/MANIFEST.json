@@ -35,7 +35,7 @@
     "content_scripts": [ {
             "matches": [ "https://webwork.elearning.ubc.ca/*" ],
             "css": [ "styles.css" ],
-            "js": [ "table.js", "nav.js", "wolfram.js" ]
+            "js": [ "onload.js", "keyhandler.js", "wolfram.js" ]
         } ],
 
     "background": {
