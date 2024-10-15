@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="popup.js"></script>
+    <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+    <h1>WeBWorK <span style="color:#D53;">Alpha</span><span style="color:#038;">LinK</span></h1>
+
+    <div id="main_pg">
+        <div id="openPanel" class="btn">Open Sidebar</div>
+
+        <div class="sectionHead">
+            <span class="rule"></span>
+            <h2>My Classes</h2>
+            <span class="rule"></span>
+        </div>
+        <table id="courselist">
+            <!-- popup.js populates this -->
+            <!-- example:
+            <tr class="course COURSE_PATH_NAME">
+                <td>COURSE_NICKNAME</td>
+                <td>
+                    <img src="assets/open.svg" alt="&nearr;">
+                </td>
+            </tr>
+            -->
+        </table>
+
+        <div class="sectionHead">
+            <span class="rule"></span>
+            <h2>Settings</h2>
+            <span class="rule"></span>
+        </div>
+        <table>
+            <tr>
+                <td title="Change zoom factor of sidepanel">Sidebar Scale</td>
+                <td>
+                    <table class="zoom">
+                        <tr>
+                            <td id="zoomOut">-</td>
+                            <td id="zoomLvl">1.0</td>
+                            <td id="zoomIn">+</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <!-- inactive until chrome.sidePanel.open does not require a user gesture
+            <tr>
+                <td title="Keep Wolfram|Alpha sidepanel open inside WeBWorK">Pin W|A Sidebar</td>
+                <td>
+                    <label class="switch">
+                        <input type="checkbox" id="pin">
+                        <div class="track"></div>
+                        <div class="thumb"></div>
+                    </label>
+                </td>
+            </tr>
+            -->
+            <tr>
+                <td title="Clicking on a problem opens it in a new tab instead of the sidebar">Open W|A to New Tab</td>
+                <td>
+                    <label class="switch">
+                        <input type="checkbox" id="newTab">
+                        <div class="track"></div>
+                        <div class="thumb"></div>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td title="Inject CSS to change the appearance of the 'course' and 'problems' tables">
+                    Custom Tables</td>
+                <td>
+                    <label class="switch">
+                        <input type="checkbox" id="table">
+                        <div class="track"></div>
+                        <div class="thumb"></div>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td title="Instantly close parentheses">Parentheses Pairing</td>
+                <td>
+                    <label class="switch">
+                        <input type="checkbox" id="paren">
+                        <div class="track"></div>
+                        <div class="thumb"></div>
+                    </label>
+                </td>
+            </tr>
+        </table>
+
+        <footer>
+            <u id="viewShortcuts">keyboard shortcuts</u> | <a href="https://github.com/munr0/WeBWorK-AlphaLinK" target="_blank">view on github</a> | <u id="setDefaults">restore defaults</u>
+        </footer>
+    </div>
+
+    <!-- Shorcuts Page -->
+    <div id="shortcuts_pg" class="hidden">
+        <div class="rule"></div>
+        <br>
+        <table>
+            <tr>
+                <td>Open sidebar</td>
+                <td><kbd>F10</kbd>&ensp;/&ensp;<kbd>ctrl</kbd> <kbd>b</kbd></td>
+            </tr>
+            <tr>
+                <td>Open sidebar (popup)</td>
+                <td><kbd>space</kbd></td>
+            </tr>
+            <tr>
+                <td>Clear entry</td>
+                <td><kbd>ctrl</kbd> <kbd>&xlarr;</kbd></td>
+            </tr>
+            <tr>
+                <td>Clone previous entry</td>
+                <td><kbd>ctrl</kbd> <kbd>&darr;</kbd></td>
+            </tr>
+            <tr>
+                <td>Next field</td>
+                <td><kbd>tab</kbd></td>
+            </tr>
+            <tr>
+                <td>Previous field</td>
+                <td><kbd>shift</kbd> <kbd>tab</kbd></td>
+            </tr>
+            <tr>
+                <td>Select focused</td>
+                <td><kbd>\</kbd></td>
+            </tr>
+            <tr>
+                <td>Preview answer</td>
+                <td><kbd>enter</kbd></td>
+            </tr>
+            <tr>
+                <td>Submit answer</td>
+                <td><kbd>ctrl</kbd> <kbd>enter</kbd></td>
+            </tr>
+            <tr>
+                <td>Next problem</td>
+                <td><kbd>shift</kbd> <kbd>enter</kbd></td>
+            </tr>
+            <tr>
+                <td>Previous problem</td>
+                <td><kbd>ctrl</kbd> <kbd>shift</kbd> <kbd>enter</kbd></td>
+            </tr>
+            <tr>
+                <td>Open popup (global)</td>
+                <td><kbd>ctrl</kbd> <kbd>shift</kbd> <kbd>h</kbd></td>
+            </tr>
+            <tr>
+                <td>View debug console</td>
+                <td><kbd>ctrl</kbd> <kbd>shift</kbd> <kbd>j</kbd></td>
+            </tr>
+        </table>
+
+        <footer>
+            <button id="back" class="btn">back</button>
+        </footer>
+    </div>
+</body>
+
+</html>

@@ -1,19 +1,19 @@
 /* supports CHTML and SVG rendering */
 .MJX-TEX:hover, svg:hover {
-    cursor: pointer;
     background-color: #DDD;
+    cursor: pointer;
     border-radius: 5px;
 }
 
 /* Problems table */
 .CORRECT {
-    background: linear-gradient(to right, transparent, #CFC)
+    background: linear-gradient(to right, transparent, #CFC);
 }
 .INCORRECT {
-    background: linear-gradient(to right, transparent, #FCC)
+    background: linear-gradient(to right, transparent, #FCC);
 }
 .INPROGRESS {
-    background: linear-gradient(to right, transparent, #FFFFC4)
+    background: linear-gradient(to right, transparent, #FFFFC4);
 }
 
 /* Homework Sets table */

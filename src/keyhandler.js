@@ -1,47 +1,25 @@
-window.addEventListener("load", () =>
-{
-    // check if WebWorK version is supported
-    const supported = chrome.runtime.getManifest().version.split('.').slice(0, 2).join('.')
-    const WWversion = document.getElementById("copyright").textContent.match(/ww_version:\s*([\d.]+)/)[1]
-    if (WWversion == supported)
-        console.info("[WW—AL] Version match.")
-    else
-        console.warn(`[WW—AL] This build of WebWorK AlphaLink was developed for WebWorK version ${supported}. Performance may be unstable.`)
-
-    // start cursor in the first textbox
-    const textBox = document.getElementById("AnSwEr0001")
-    if (textBox) {
-        textBox.focus()
-        if (isInput(textBox))
-            textBox.setSelectionRange(textBox.value.length, textBox.value.length)
-    }
-    else
-        console.log("[WW—AL] No textbox to select.")
-})
-
-
 /* Handle special keypresses */
-document.addEventListener("keydown", function (e)
+document.addEventListener('keydown', (e) =>
 {
-
+    const fields = document.querySelectorAll('input[type="text"], input[type="checkbox"], input[type="radio"], select')
     const field = document.activeElement
     const text = field.value || field.textContent
     const cursorPos = field.selectionStart
     const Rchar = text.charAt(cursorPos)
     const Lchar = text.charAt(cursorPos - 1)
 
-    // open side panel with hits F9
-    if (e.key == "F10") {
+    // open side panel with hits F10 or ctrl-b
+    if (e.key === 'F10' || e.ctrlKey && e.key === 'b') {
         e.preventDefault()
-        chrome.runtime.sendMessage({ type: 'open_side_panel', data: "https://www.wolframalpha.com/" })
+        chrome.runtime.sendMessage({ type: 'toggle_side_panel' })
     }
 
     // go to previous problem with ctrl-shift-enter
-    else if (e.ctrlKey && e.shiftKey && e.key == "Enter") {
+    else if (e.ctrlKey && e.shiftKey && e.key === 'Enter') {
         e.preventDefault()
-        const buttons = document.querySelectorAll("a")
+        const buttons = document.querySelectorAll('a')
         for (let i = 0; i < buttons.length; i++) {
-            if (buttons[i].textContent.includes("Previous Problem")) {
+            if (buttons[i].textContent.includes('Previous Problem')) {
                 buttons[i].click()
                 break
             }
@@ -49,79 +27,101 @@ document.addEventListener("keydown", function (e)
     }
 
     // go to next problem with shift-enter
-    else if (e.shiftKey && e.key == "Enter") {
+    else if (e.shiftKey && e.key === 'Enter') {
         e.preventDefault()
-        const buttons = document.querySelectorAll("a")
+        const buttons = document.querySelectorAll('a')
         for (let i = 0; i < buttons.length; i++) {
-            if (buttons[i].textContent.includes("Next Problem")) {
+            if (buttons[i].textContent.includes('Next Problem')) {
                 buttons[i].click()
                 break
             }
         }
     }
 
-    // submit answer with ctrl-enter
-    else if (e.ctrlKey && e.key == "Enter") {
+    // keyboard left-click
+    else if (e.altKey && e.key === 'Enter') {
         e.preventDefault()
-        document.getElementById("checkAnswers_id").click()
+        document.activeElement.click()
     }
 
-    // cycle through textboxes with tab
-    else if (e.key == "Tab") {
+    // submit answer with ctrl-enter
+    else if (e.ctrlKey && e.key === 'Enter') {
+        e.preventDefault();
+        (document.getElementById('submitAnswers_id') || document.getElementById('checkAnswers_id'))?.click()
+    }
+
+    // cycle through fields with tab/shift-tab
+    else if (e.key === 'Tab') {
         e.preventDefault()
-        let fieldNum = parseInt(field.id.slice(-4))
-        fieldNum++
-        const nextFieldID = "AnSwEr" + fieldNum.toString().padStart(4, '0')
-        let nextField = document.getElementById(nextFieldID)
-        if (!nextField)
-            nextField = document.getElementById("AnSwEr0001")
-        nextField.focus()
-        if (isInput(nextField))
+        let dir = 1
+        if (e.shiftKey)
+            dir = -1
+        let nextField
+        for (let i = 0; i < fields.length; i++) {
+            const test = fields[i]
+            if (test === field) {
+                let next = i + dir
+                if (next === fields.length)
+                    next = 0
+                else if (next === -1)
+                    next = fields.length - 1
+                nextField = fields[next]
+                break
+            }
+        }
+        nextField ? nextField.focus() : fields[0].focus()
+        if (isTextInput(nextField))
             nextField.setSelectionRange(nextField.value.length, nextField.value.length)
     }
 
-    // clear field with backslash
-    else if (e.key == "\\") {
+    // select focused w/o mouse
+    else if (e.key === '\\') {
+        field.click() // doesn't work on <select>
+    }
+
+    // clear field with ctrl-bksp
+    else if (e.ctrlKey && e.key === 'Backspace') {
         e.preventDefault()
         field.value = ''
     }
 
-    // pulldown previous textbox entry with F9
-    else if (e.key == "F9") {
+    // pulldown previous textbox entry with ctrl-down
+    else if (e.ctrlKey && e.key === 'ArrowDown') {
         e.preventDefault()
-        // find what the previous text box was and grab its contents
-        let fieldNum = parseInt(field.id.slice(-4))
-        fieldNum = --fieldNum ? fieldNum : 1
-        const prevFieldID = "AnSwEr" + fieldNum.toString().padStart(4, '0')
-        const bringDown = document.getElementById(prevFieldID).value
-        // insert these contents into current text box
-        const replace = text.substring(0, cursorPos) + bringDown + text.substring(cursorPos)
-        field.value = replace
+        let bringDown = fields[0].value // first box will just copy itself
+        for (let i = 1; i < fields.length; i++) {
+            const test = fields[i]
+            if (test === field) {
+                bringDown = fields[i - 1].value
+                break
+            }
+        }
+        field.value = text.substring(0, cursorPos) + bringDown + text.substring(cursorPos)
         field.setSelectionRange(cursorPos + bringDown.length, cursorPos + bringDown.length)
     }
 
     // add closing paren when '(' typed
-    else if (e.shiftKey && e.key == "(") {
+    else if (e.shiftKey && e.key == '(' && enableParen) {
         // don't add closing paren if there is text to right
-        if (Rchar && !(Rchar == " " || Rchar == ")"))
+        if (Rchar && !(Rchar == ' ' || Rchar == ')'))
             return false
         // add close paren, move cursor back
-        const replace = text.substring(0, cursorPos) + ")" + text.substring(cursorPos)
+        const replace = text.substring(0, cursorPos) + ')' + text.substring(cursorPos)
         field.value = replace
         field.setSelectionRange(cursorPos, cursorPos)
     }
 
     // skip close paren if we have it already
-    else if (e.shiftKey && e.key == ")") {
-        if (Rchar == ")") {
+    else if (e.shiftKey && e.key === ')' && enableParen) {
+        if (Rchar === ')') {
             e.preventDefault()
             field.setSelectionRange(cursorPos + 1, cursorPos + 1)
         }
     }
 
     // del both open and close paren with backspace
-    else if (e.key == "Backspace") {
-        if (Lchar == "(" && Rchar == ")") {
+    else if (e.key === 'Backspace' && enableParen) {
+        if (Lchar === '(' && Rchar === ')') {
             const replace = text.substring(0, cursorPos) + text.substring(cursorPos + 1)
             field.value = replace
             field.setSelectionRange(cursorPos, cursorPos)
@@ -130,16 +130,15 @@ document.addEventListener("keydown", function (e)
 })
 
 
-/* Special paste */
-document.addEventListener("dblclick", function (e)
+/* Special paste (handles W|A "copyable plain text") */
+document.addEventListener('dblclick', (e) =>
 {
     const field = document.activeElement
-    if (isInput(field) && !field.value) {
+    if (isTextInput(field) && !field.value) {
         navigator.clipboard.readText().then(str =>
         {
             // process to get the exact value answer if there is one
             const index = str.lastIndexOf('=') != -1 ? str.lastIndexOf('=') : str.lastIndexOf('≈')
-            console.log(index)
             if (index !== -1) {
                 str = str.substring(index + 1)
                 if (str.indexOf('≈') !== -1)
@@ -153,7 +152,21 @@ document.addEventListener("dblclick", function (e)
 })
 
 
-function isInput(el)
+function isTextInput(el)
 {
-    return el.tagName == "INPUT" && el.type == "text"
+    return el?.tagName === 'INPUT' && el?.type === 'text'
 }
+
+async function grabSettings()
+{
+    const data = await chrome.storage.sync.get(['settings'])
+    return data.settings
+}
+
+// the other code won't try to access this early enough that async is an issue
+let enableParen
+(async () =>
+{
+    const settings = await grabSettings()
+    enableParen = settings.paren
+})()

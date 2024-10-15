@@ -1,0 +1,220 @@
+@font-face {
+    src: url('assets/MarlinSoftSQ-ExtraBold.woff2') format('woff2');
+    font-family: 'bld';
+    font-style: normal;
+}
+@font-face {
+    src: url('assets/MarlinSoftSQ-Medium.woff2') format('woff2');
+    font-family: 'med';
+    font-style: normal;
+}
+
+/* Main */
+body {
+    overflow-y: hidden;
+    width: 380px;
+    background-color: #69E;
+    cursor: default;
+    font-family: 'med', sans-serif;
+    color: #FFF;
+}
+h1 {
+    font-size: 32px;
+    font-family: 'bld', sans-serif;
+    text-align: center;
+}
+.btn {
+    background-color: #155899;
+    color: #4F8ACF;
+}
+.btn:hover {
+    background-color: #038;
+    cursor: pointer;
+}
+#openPanel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 288px;
+    height: 32px;
+    margin: 0 auto;
+    margin-bottom: -6px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-family: 'bld', sans-serif;
+}
+.sectionHead {
+    display: flex;
+    align-items: center;
+}
+h2 {
+    padding: 0 12px;
+    font-size: 24px;
+    font-family: 'bld', sans-serif;
+}
+.rule {
+    flex: 1;
+    height: 5px;
+    margin-top: 4px;
+    background-color: #FFF;
+    border-radius: 3px;
+}
+#main_pg>table {
+    border-spacing: 0px;
+    width: 100%;
+    padding: 0 15px;
+}
+#courselist {
+    display: block;
+    overflow-y: auto;
+    max-height: 150px;
+}
+#courselist tr:hover td {
+    background-color: #9BF;
+    cursor: pointer;
+}
+#courselist img {
+    visibility: hidden;
+}
+#courselist tr:hover img {
+    visibility: visible;
+}
+td:not(.zoom td) {
+    height: 28px;
+    font-size: 15px;
+}
+#main_pg td:first-child:not(.zoom td) {
+    width: 100%;
+    padding-left: 10px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+#courselist td:last-child {
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+footer {
+    margin-top: 32px;
+    margin-bottom: 16px;
+    font-size: 10px;
+    text-align: center;
+}
+footer sub {
+    font-size: 17px;
+    font-family: Arial, sans-serif;
+}
+footer a {
+    color: inherit;
+}
+footer u:hover, footer a:hover {
+    cursor: pointer;
+    color: #038;
+}
+
+/* Shorcuts Page */
+#shortcuts_pg table {
+    border-spacing: 0px;
+    margin-left: 25px;
+}
+#shortcuts_pg td:first-child {
+    width: 180px;
+}
+kbd {
+    padding: 0 5px;
+    background-color: #CACACA;
+    border-width: 1px 3px 4px;
+    border-style: solid;
+    border-color: #EEE #B4B4B4 #B4B4B4 #EEE;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: monospace;
+}
+button.btn {
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-family: 'med', sans-serif;
+}
+
+/* Interactive Elements */
+.switch:hover {
+    background-color: #9BF;
+    cursor: pointer;
+    border-radius: 8px;
+}
+.switch {
+    display: flex;
+    align-items: center;
+    width: 36px;
+    height: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.switch input {
+    display: none;
+}
+.switch .track {
+    position: absolute;
+    width: 36px;
+    height: 12px;
+    background-color: #888;
+    border-radius: 6px;
+}
+.switch input:checked~.track {
+    background-color: #4F8ACF;
+}
+.switch .thumb {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    transition: .4s;
+    background-color: #FFF;
+    border-radius: 50%;
+}
+.switch input:checked~.thumb {
+    position: absolute;
+    transform: translateX(16px);
+    background-color: #155899;
+}
+.zoom {
+    user-select: none;
+    border-spacing: 0px;
+    height: 20px;
+    font-size: 12px;
+    font-family: monospace;
+    color: #888;
+    text-align: center;
+}
+.zoom td:first-child {
+    width: 14px !important;
+    margin: 0 !important;
+    background-color: #FFF;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.zoom td:nth-child(2) {
+    border-spacing: 4px;
+    width: 28px !important;
+    background-color: #FFF;
+    border-right: 1px solid #888;
+    border-left: 1px solid #888;
+}
+.zoom td:last-child {
+    width: 14px !important;
+    background-color: #FFF;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+.zoom td:nth-child(odd):hover {
+    background-color: #888;
+    cursor: pointer;
+    color: #FFF;
+}
+
+/* Assign with popup.js */
+.hidden {
+    display: none;
+}

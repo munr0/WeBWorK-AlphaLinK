@@ -2,7 +2,8 @@
     "manifest_version": 3,
 
     "name": "WeBWorK AlphaLinK",
-    "version": "2.18.0.0",
+    "version": "1.0.2.18",
+    "version_name": "1.0",
     "description": "Enhanced WeBWorK functionality including Wolfram|Alpha integration. Select the icon in the top right to view settings.",
     "homepage_url": "https://github.com/munr0/WeBWorK-AlphaLinK",
     "icons": {
@@ -16,16 +17,23 @@
         "default_title": "WebWorK AlphaLinK",
         "default_popup": "popup/popup.html",
         "default_icon": {
-            "16": "resources/icon_16.png",
-            "32": "resources/icon_32.png"
+            "32": "resources/logo.png"
+        }
+    },
+    "commands": {
+        "_execute_action": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+H",
+                "mac": "Command+Shift+H"
+            }
         }
     },
     "side_panel": {
         "default_path": "side_panel/panel.html"
     },
 
-    "permissions": [ "storage", "sidePanel", "clipboardRead", "clipboardWrite", "declarativeNetRequestWithHostAccess", "tabs", "activeTab" ],
-    "host_permissions": [ "https://www.wolframalpha.com/*" ],
+    "permissions": [ "storage", "sidePanel", "clipboardRead", "declarativeNetRequestWithHostAccess" ],
+    "host_permissions": [ "https://www.wolframalpha.com/*", "https://www.symbolab.com/*" ],
 
     "web_accessible_resources": [ {
             "resources": [ "resources/replacements.csv" ],

@@ -23,7 +23,7 @@ The aim of this software is to provide a seamless user experience by streamlinin
 
 ## Installation
 ### Add to Chrome (Recommended)
-This extension is ~~available~~ **(not yet)** for chromium-based browsers on the [Chrome Web Store](https://github.com/munr0/WeBWorK-AlphaLinK).
+This extension is ~~available~~ for chromium-based browsers on the [Chrome Web Store](https://github.com/munr0/WeBWorK-AlphaLinK). *–currently in the process of being submitted for review–*
 
 ### Manual Installation
 1. Clone the repo or download [just the /src](https://download-directory.github.io/?url=https%3A%2F%2Fgithub.com%2Fmunr0%2FWeBWorK-AlphaLinK%2Ftree%2Fmain%2Fsrc)
@@ -45,6 +45,7 @@ This extension is ~~available~~ **(not yet)** for chromium-based browsers on the
 | ![image](https://github.com/user-attachments/assets/6ff908c1-92b4-494d-85de-aef9419badfb) | ![image](https://github.com/user-attachments/assets/7d5a01d6-288c-4b40-952b-f6cfaa4f7d1a) |
 
 ## Planned Features
+- Working 'Sidebar Scale' setting
+- 'Time Remaining' column on course page
 - Proper matrix/vector TeX interpretation for W|A
 - Rename and remove classes on the popup
-- 'Time Remaining' column on course page

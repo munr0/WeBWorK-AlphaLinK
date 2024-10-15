@@ -1,0 +1,17 @@
+<svg width="16px" height="16x" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <path stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+    d="
+    M 6 1
+    H 3
+    a2 2 0 0 0 -2 2
+    V 13
+    a 2 2 0 0 0 2 2
+    H 13
+    a 2 2 0 0 0 2 -2
+    V 10
+    
+    M 15 1 h -4
+    M 15 1 v 4
+    L 15 1 8 8
+    "/>
+</svg>

@@ -1,6 +1,6 @@
-document.addEventListener("DOMContentLoaded", () =>
+document.addEventListener('DOMContentLoaded', () =>
 {
-    console.log("panel.js loaded");
+    console.log('panel.js loaded');
 
     (async () =>
     {
@@ -11,15 +11,15 @@ document.addEventListener("DOMContentLoaded", () =>
                 id: 1,
                 priority: 1,
                 action: {
-                    type: "modifyHeaders",
+                    type: 'modifyHeaders',
                     responseHeaders: [{
-                        header: "x-frame-options",
-                        operation: "remove"
+                        header: 'x-frame-options',
+                        operation: 'remove'
                     }]
                 },
                 condition: {
-                    urlFilter: "https://www.wolframalpha.com/",
-                    resourceTypes: ["main_frame", "sub_frame"]
+                    regexFilter: 'https://(www.wolframalpha.com|www.symbolab.com)/',
+                    resourceTypes: ['main_frame', 'sub_frame']
                 }
             }]
         })
@@ -28,16 +28,18 @@ document.addEventListener("DOMContentLoaded", () =>
     })()
 })
 
-
-chrome.storage.onChanged.addListener(function (changes, area)
+chrome.storage.onChanged.addListener((changes, area) =>
 {
     if (area === 'session')
-        updateSrc(changes)
+        updateSrc()
 })
 
 async function updateSrc()
 {
     const data = await chrome.storage.session.get(['URL'])
-    const page = data.URL
-    document.querySelector('iframe').src = page
+    const page = data.URL || 'menu.html'
+    if (page !== 'close')
+        document.querySelector('iframe').src = page
+    else
+        window.close()
 }
