@@ -4,15 +4,11 @@ WeBWorK AlphaLinK is a Manifest-V3 Chrome Web Extension full of quality-of-life 
 The aim of this software is to provide a seamless user experience by streamlining interactions and navigation, enabling students to concentrate fully on their homework and learning.
 
 ## Functionality
-
-<img align="right" src="https://github.com/user-attachments/assets/ff9261ac-9589-4067-b7cc-b119ac4479a6" alt="kb-shortcuts">
-
 ### QoL Improvements:
 - Various enhanced UI elements
 - Course page 'Score' and 'Problems' columns 
 - Problem set page completion indicators
-- Countless keyboard shortcuts
-
+- Countless [keyboard shortcuts](#keyboard-shortcuts)
 ### Features:
 - Navigate between classes in two clicks
 - Open questions directly in Wolfram|Alpha
@@ -24,7 +20,6 @@ The aim of this software is to provide a seamless user experience by streamlinin
   - Desmos 3D
   - Piazza
 - GUI to enable/disable features
-<br>
 
 ## Installation
 ### Add to Chrome (Recommended)
@@ -44,9 +39,11 @@ This extension is ~~available~~ for chromium-based browsers on the [Chrome Web S
 ## Usage
 <img align="right" src="https://github.com/user-attachments/assets/9ce4f78a-7880-4e48-8535-974688cf6a04" alt="popup">
 
-Click on the extension icon in Chrome or hit `ctrl`+`shift`+`h` to open this popup, linking you to any classes you have previously visited.
+- Click on the extension icon in Chrome or hit `ctrl`+`shift`+`h` to open this popup, linking you to any classes you have previously visited.
 
-Click any rendered problem TeX to open it in the Wolfram|Alpha sidebar. (see demo video below)
+- Use any of the extension's [keyboard shortcuts](#keyboard-shortcuts) while inside of WeBWorK.
+
+- Click any rendered problem TeX to open it in the Wolfram|Alpha sidebar.
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
@@ -58,6 +55,11 @@ https://github.com/user-attachments/assets/558da2ac-f208-45d0-953d-3c286d2722b5
 | --- | --- |
 | ![image](https://github.com/user-attachments/assets/587740ad-95cd-4219-b97a-3877a2cd3d5a) | ![image](https://github.com/user-attachments/assets/abbc7cc9-9fe8-467c-965e-d34599091985) |
 | ![image](https://github.com/user-attachments/assets/6ff908c1-92b4-494d-85de-aef9419badfb) | ![image](https://github.com/user-attachments/assets/7d5a01d6-288c-4b40-952b-f6cfaa4f7d1a) |
+
+### Keyboard Shortcuts:
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/ff9261ac-9589-4067-b7cc-b119ac4479a6" alt="kb-shortcuts">
+</p>
 
 ## Planned Features
 - Working 'Sidebar Scale' setting
