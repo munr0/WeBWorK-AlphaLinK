@@ -1,8 +1,13 @@
-/* supports CHTML and SVG rendering */
+/* Hover effect on TeX, supports CHTML and SVG rendering */
 .MJX-TEX:hover, svg:hover {
     background-color: #DDD;
     cursor: pointer;
     border-radius: 5px;
+}
+
+/* Wider answer boxes */
+input[type="text"] {
+    min-width: 128px;
 }
 
 /* Problems table */
